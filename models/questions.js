@@ -1,8 +1,12 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-export const questionsSchema = new mongoose.Schema({
+const questionSchema = new Schema({
+  category: String,
+  type: String,
+  difficulty: String,
+  question: String,
+  correct_answer: String,
+  incorrect_answers: [String],
 });
 
-
-const questions = new mongoose.model('questions', questionsSchema);
-export default questions;
+export default mongoose.model('Question', questionSchema);
