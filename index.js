@@ -2,11 +2,18 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-//import projectsRouter from './routes/projects.js';
 import cors from 'cors';
+import questionRouter from './routes/questionRoutes.js';
+import quizRouter from './routes/quizRoutes.js';
+import userRouter from './routes/userRoutes.js';
+
 
 dotenv.config();
 const app = express();
+
+app.use(cors());
+app.use(express.json());
+
 const PORT = process.env.PORT || 3007;
 
 // ===== Connect to DB ===== //
@@ -23,12 +30,13 @@ app.use(express.json()); // parse data to the body
 app.use(express.urlencoded({extended: true}));
 app.use(cors()); // allows backend to talk to frontend in the same machine
 
-// ===== Routes ===== //
-//app.use('/api/projects', projectsRouter);
-
 app.get('/', (req, res) => {
     res.send('Welcome to my NZ FUN TRIVIA!')
 });
+
+app.use('/api/questions', questionRouter);
+app.use('/api/quizzes', quizRouter);
+app.use('/api/users', userRouter);
 
 // ===== Error Middlewares ===== //
 app.use((e, req, res, next) => {

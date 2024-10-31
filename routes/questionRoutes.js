@@ -1,9 +1,11 @@
 import express from 'express';
-import router from express.Router();
-import Question from '../models/Question';
-import axios from 'axios';
+import Question from '../models/questions.js';
+//import axios from 'axios';
 
-router.get('/', async (req, res) => {
+//Creating an Express router
+const questionRouter = express.Router();
+
+questionRouter.get('/', async (req, res) => {
   try {
     const questions = await Question.find().exec();
     res.json(questions);
@@ -13,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/fetch', async (req, res) => {
+questionRouter.post('/fetch', async (req, res) => {
   try {
     const apiResponse = await axios.get(`https://quizapi.io/api/v1/questions?apiKey=${process.env.API_KEY}&limit=10`);
     const questions = apiResponse.data;

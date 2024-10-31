@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from 'mongoose';
-import quizzes from './models/quizzes.js';
+import quizzes from '../models/quizzes.js';
 
 const userSchema = new Schema({
   name: String,

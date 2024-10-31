@@ -1,7 +1,9 @@
 import express from 'express';
-import router from express.Router();
-import User from '../models/User';
-import quizzes from '../models/quizzes';
+import User from '../models/users.js';
+import quizzes from '../models/quizzes.js';
+
+//Creating an Express router
+const userRouter = express.Router();
 
 //Create users
 userRouter.post('/', async (req, res) => {

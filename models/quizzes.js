@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from 'mongoose';
-import Question from '../models/Question';
+import Question from '../models/questions.js';
 
 const quizSchema = new Schema({
   title: String,

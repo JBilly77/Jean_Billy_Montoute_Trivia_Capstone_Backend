@@ -1,9 +1,11 @@
 import express from 'express';
-import router from express.Router();
-import quizzes from '../models/quizzes';
-import Question from '../models/Question';
+import quizzes from '../models/quizzes.js';
+import Question from '../models/questions.js';
 
-router.post('/', async (req, res) => {
+//Creating an Express router
+const quizRouter = express.Router();
+
+quizRouter.post('/', async (req, res) => {
   try {
     const quiz = new quizzes({ title: req.body.title });
     await quiz.save();
@@ -14,7 +16,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+quizRouter.get('/:id', async (req, res) => {
   try {
     const quiz = await quizzes.findById(req.params.id).populate('questions').exec();
     res.json(quiz);
@@ -24,7 +26,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.patch('/:id', async (req, res) => {
+quizRouter.patch('/:id', async (req, res) => {
   try {
     const quiz = await quizzes.findByIdAndUpdate(req.params.id, { $addToSet: { questions: req.body.questionId } }, { new: true }).exec();
     res.json(quiz);
