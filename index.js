@@ -10,10 +10,6 @@ import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 const app = express();
-
-app.use(cors());
-app.use(express.json());
-
 const PORT = process.env.PORT || 3007;
 
 // ===== Connect to DB ===== //
@@ -29,6 +25,8 @@ app.use(morgan('dev')); // logger
 app.use(express.json()); // parse data to the body
 app.use(express.urlencoded({extended: true}));
 app.use(cors()); // allows backend to talk to frontend in the same machine
+
+//==========ROUTES===========//
 
 app.get('/', (req, res) => {
     res.send('Welcome to my NZ FUN TRIVIA!')
